@@ -25,5 +25,5 @@ class RegistrationTest(BaseTest):
         # 6. Sprawdź, czy email wpisany wcześniej wyświetla się polu email
         self.assertEqual(RegistrationData.REGISTRATION_EMAIL, self.create_customer_account_page.get_email())
         # 7. Wpisz hasło
-        # ...
+        self.create_customer_account_page.enter_password("jashg281673!")
         sleep(3)

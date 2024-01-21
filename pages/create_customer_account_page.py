@@ -7,6 +7,7 @@ class CreateCustomerAccountPageLocators:
     GENDER_FEMALE = (By.ID, "id_gender2")
     LAST_NAME_INPUT = (By.ID, "customer_lastname")
     EMAIL_INPUT = (By.ID, "email")
+    PASSWORD_INPUT = (By.ID, "passwd")
 
 class CreateCustomerAccountPage(BasePage):
     def choose_gender(self, gender):
@@ -25,6 +26,10 @@ class CreateCustomerAccountPage(BasePage):
         el = self.driver.find_element(*CreateCustomerAccountPageLocators.LAST_NAME_INPUT)
         el.send_keys(last_name)
 
+    def enter_password(self, password):
+        el = self.driver.find_element(*CreateCustomerAccountPageLocators.PASSWORD_INPUT)
+        el.send_keys(password)
+
     def get_email(self):
         """
         Gets email visible in the Email input
@@ -33,3 +38,4 @@ class CreateCustomerAccountPage(BasePage):
         el = self.driver.find_element(*CreateCustomerAccountPageLocators.EMAIL_INPUT)
         # Pobrać tekst i zwrócić go
         return el.get_attribute("value")
+
