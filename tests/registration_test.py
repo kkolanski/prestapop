@@ -30,4 +30,8 @@ class RegistrationTest(BaseTest):
         self.create_customer_account_page.select_birthdate("4", "2", "1990")
         # 9. Kliknij "Register"
         self.create_customer_account_page.click_register_btn()
+        # Sprawdź poprawność komunikatu o liczbie błędów
+        self.assertEqual("There is 1 error", self.create_customer_account_page.get_number_of_user_errors_message())
+        # Sprawdź poprawność komunikatu o niewpisaniu imienia
+        self.assertEqual('firstname is required.', self.create_customer_account_page.get_user_error_messages()[0])
         sleep(3)

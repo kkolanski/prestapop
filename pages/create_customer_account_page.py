@@ -14,6 +14,7 @@ class CreateCustomerAccountPageLocators:
     BIRTH_YEAR = (By.ID, "years")
     REGISTER_BTN = (By.ID, "submitAccount")
     NUMBER_OF_USER_ERRORS_MESSAGE = (By.XPATH, '//div[@class="alert alert-danger"]/p')
+    USER_ERROR_MESSAGES = (By.XPATH, '//div[@class="alert alert-danger"]/ol/li')
 
 class CreateCustomerAccountPage(BasePage):
     def choose_gender(self, gender):
@@ -63,8 +64,19 @@ class CreateCustomerAccountPage(BasePage):
         return el.get_attribute("value")
 
     def get_number_of_user_errors_message(self):
-        pass
+        """
+        Returns message displayed to the user regarding number of errors he commited
+        """
+        el = self.driver.find_element(*CreateCustomerAccountPageLocators.NUMBER_OF_USER_ERRORS_MESSAGE)
+        return el.text
 
     def get_user_error_messages(self):
-        pass
-
+        """
+        Returns list of user error messages
+        """
+        errors = self.driver.find_elements(*CreateCustomerAccountPageLocators.USER_ERROR_MESSAGES)
+        errors_texts = []
+        for e in errors:
+            # Dodaję zawartość tekstową do listy
+                errors_texts.append(e.text)
+        return  errors_texts
