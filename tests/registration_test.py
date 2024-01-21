@@ -22,6 +22,8 @@ class RegistrationTest(BaseTest):
         self.create_customer_account_page.choose_gender(Gender.FEMALE)
         # 5. Wpisz nazwisko
         self.create_customer_account_page.enter_last_name("Kowalski")
-        # Sprawdź, czy email wpisany wcześniej wyświetla się polu email
+        # 6. Sprawdź, czy email wpisany wcześniej wyświetla się polu email
         self.assertEqual(RegistrationData.REGISTRATION_EMAIL, self.create_customer_account_page.get_email())
+        # 7. Wpisz hasło
+        # ...
         sleep(3)
