@@ -26,4 +26,6 @@ class RegistrationTest(BaseTest):
         self.assertEqual(RegistrationData.REGISTRATION_EMAIL, self.create_customer_account_page.get_email())
         # 7. Wpisz hasło
         self.create_customer_account_page.enter_password("jashg281673!")
+        # 8. Wybierz datę urodzenia
+        self.create_customer_account_page.select_birthdate("4", "2", "1990")
         sleep(3)
