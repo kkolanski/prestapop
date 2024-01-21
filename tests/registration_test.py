@@ -7,27 +7,31 @@ class RegistrationTest(BaseTest):
     """
     Registration tests
     """
-    def test_no_name(self):
+    def setUp(self):
+        super().setUp()
+        self.test_data = RegistrationData()
+    def test_no_first_name_entered(self):
         """
-        TC 001: User does not enter his name
-        :return:
+        TC 001: User does not enter his first name
         """
         # KROKI
         # 1. Kliknij "Sign In"
         self.authentication_page = self.home_page.click_sign_in()
         # 2. Wpisz email
         # 3. Kliknij przycisk "Create account"
-        self.create_customer_account_page = self.authentication_page.enter_email_and_click_create_account(RegistrationData.REGISTRATION_EMAIL)
+        self.create_customer_account_page = self.authentication_page.enter_email_and_click_create_account(self.test_data.registration_email)
         # 4. Wybierz płeć
-        self.create_customer_account_page.choose_gender(Gender.FEMALE)
+        self.create_customer_account_page.choose_gender(self.test_data.registration_gender)
         # 5. Wpisz nazwisko
-        self.create_customer_account_page.enter_last_name("Kowalski")
+        self.create_customer_account_page.enter_last_name(self.test_data.registration_last_name)
         # 6. Sprawdź, czy email wpisany wcześniej wyświetla się polu email
-        self.assertEqual(RegistrationData.REGISTRATION_EMAIL, self.create_customer_account_page.get_email())
+        self.assertEqual(self.test_data.registration_email, self.create_customer_account_page.get_email())
         # 7. Wpisz hasło
-        self.create_customer_account_page.enter_password("jashg281673!")
+        self.create_customer_account_page.enter_password(self.test_data.password)
         # 8. Wybierz datę urodzenia
-        self.create_customer_account_page.select_birthdate("4", "2", "1990")
+        self.create_customer_account_page.select_birthdate(self.test_data.day_of_birth,
+                                                           self.test_data.month_of_birth,
+                                                           self.test_data.year_of_birth)
         # 9. Kliknij "Register"
         self.create_customer_account_page.click_register_btn()
         # Sprawdź poprawność komunikatu o liczbie błędów
@@ -35,3 +39,16 @@ class RegistrationTest(BaseTest):
         # Sprawdź poprawność komunikatu o niewpisaniu imienia
         self.assertEqual('firstname is required.', self.create_customer_account_page.get_user_error_messages()[0])
         sleep(3)
+
+    # def test_no_first_and_last_name_entered(self):
+    #     """
+    #     TC 002: User does not enter his first and last name
+    #     """
+    #     # KROKI
+    #     # 1. Kliknij "Sign In"
+    #     self.authentication_page = self.home_page.click_sign_in()
+    #     # 2. Wpisz email
+    #     # 3. Kliknij przycisk "Create account"
+    #     self.create_customer_account_page = self.authentication_page.enter_email_and_click_create_account("hdgsfhg@pw.pl")
+    #     # 4. Wybierz płeć
+    #     self.create_customer_account_page.choose_gender(Gender.FEMALE)
