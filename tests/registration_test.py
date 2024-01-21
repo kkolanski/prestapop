@@ -28,4 +28,6 @@ class RegistrationTest(BaseTest):
         self.create_customer_account_page.enter_password("jashg281673!")
         # 8. Wybierz datę urodzenia
         self.create_customer_account_page.select_birthdate("4", "2", "1990")
+        # 9. Kliknij "Register"
+        self.create_customer_account_page.click_register_btn()
         sleep(3)

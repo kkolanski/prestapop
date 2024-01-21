@@ -12,6 +12,8 @@ class CreateCustomerAccountPageLocators:
     BIRTH_DAY = (By.ID, "days")
     BIRTH_MONTH = (By.ID, "months")
     BIRTH_YEAR = (By.ID, "years")
+    REGISTER_BTN = (By.ID, "submitAccount")
+    NUMBER_OF_USER_ERRORS_MESSAGE = (By.XPATH, '//div[@class="alert alert-danger"]/p')
 
 class CreateCustomerAccountPage(BasePage):
     def choose_gender(self, gender):
@@ -48,6 +50,9 @@ class CreateCustomerAccountPage(BasePage):
         birth_year_select = Select(self.driver.find_element(*CreateCustomerAccountPageLocators.BIRTH_YEAR))
         birth_year_select.select_by_value(year)
 
+    def click_register_btn(self):
+        self.driver.find_element(*CreateCustomerAccountPageLocators.REGISTER_BTN).click()
+
     def get_email(self):
         """
         Gets email visible in the Email input
@@ -56,4 +61,10 @@ class CreateCustomerAccountPage(BasePage):
         el = self.driver.find_element(*CreateCustomerAccountPageLocators.EMAIL_INPUT)
         # Pobrać tekst i zwrócić go
         return el.get_attribute("value")
+
+    def get_number_of_user_errors_message(self):
+        pass
+
+    def get_user_error_messages(self):
+        pass
 
