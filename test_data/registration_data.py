@@ -1,7 +1,17 @@
 from utils.gender import Gender
 from faker import Faker
 import random
+import csv
 
+def get_csv_data(filename):
+    rows = []
+    data_file = open(filename, "r")
+    reader = csv.reader(data_file)
+    # Pomiń pierwszy wiersz
+    next(reader, None)
+    for row in reader:
+        rows.append(row)
+    return rows
 
 class RegistrationData:
     def __init__(self):
