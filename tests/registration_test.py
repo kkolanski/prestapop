@@ -77,6 +77,22 @@ class RegistrationTest(BaseTest):
         self.assertEqual('firstname is required.', self.create_customer_account_page.get_user_error_messages()[0])
         sleep(3)
 
+    def test_no_password_entered(self):
+        # KROKI
+        # 1. Kliknij "Sign In"
+        self.authentication_page = self.home_page.click_sign_in()
+        self.create_customer_account_page = self.authentication_page.enter_email_and_click_create_account(self.test_data.registration_email)
+        self.create_customer_account_page.enter_first_name(self.test_data.registration_first_name)
+        self.create_customer_account_page.enter_last_name(self.test_data.registration_last_name)
+        self.create_customer_account_page.select_birthdate(self.test_data.day_of_birth,
+                                                           self.test_data.month_of_birth,
+                                                           self.test_data.year_of_birth)
+        self.create_customer_account_page.click_register_btn()
+        self.assertEqual("There is 1 error", self.create_customer_account_page.get_number_of_user_errors_message())
+        self.assertEqual('password is required.', self.create_customer_account_page.get_user_error_messages()[0])
+
+
+
 
 # def test_no_first_and_last_name_entered(self):
     #     """

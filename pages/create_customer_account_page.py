@@ -6,6 +6,7 @@ from selenium.webdriver.support.select import Select
 class CreateCustomerAccountPageLocators:
     GENDER_MALE = (By.ID, "id_gender1")
     GENDER_FEMALE = (By.ID, "id_gender2")
+    FIRST_NAME_INPUT = (By.ID, "customer_firstname")
     LAST_NAME_INPUT = (By.ID, "customer_lastname")
     EMAIL_INPUT = (By.ID, "email")
     PASSWORD_INPUT = (By.ID, "passwd")
@@ -25,6 +26,13 @@ class CreateCustomerAccountPage(BasePage):
             self.driver.find_element(*CreateCustomerAccountPageLocators.GENDER_FEMALE).click()
         else:
             self.driver.find_element(*CreateCustomerAccountPageLocators.GENDER_MALE).click()
+
+    def enter_first_name(self, first_name):
+        """
+        Enters first name
+        """
+        el = self.driver.find_element(*CreateCustomerAccountPageLocators.FIRST_NAME_INPUT)
+        el.send_keys(first_name)
 
     def enter_last_name(self, last_name):
         """
